@@ -1,0 +1,22 @@
+import csv
+
+path = "C:/Users/Luiz/Downloads/ARKIT_LUIZ/20220802_MySlate_14/MySlate_14_iPhone_raw.csv"
+
+file_data = open(path, mode="r")
+csv_reader = csv.reader(file_data)
+names = next(csv_reader)[2:]
+
+Frames = []
+
+for line_number, line in enumerate(csv_reader):
+    weights = line[2:]
+    d = {}
+    for name, weight in zip(names, weights):
+        d[name] = weight
+    Frames.append(d)
+
+shapes = ["EyeBlinkLeft", "EyeBlinkRight", "MouthRight", "MouthLeft"]
+
+f = 38
+for s in shapes:
+    print "{} {}".format(s, Frames[f][s])
